@@ -1,0 +1,19 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+
+target 'Joidy-Intro' do
+	pod "RazzleDazzle"
+
+end
+
+target 'Joidy-IntroTests' do
+
+end
+
+target 'Joidy-IntroUITests' do
+
+end
+
+
