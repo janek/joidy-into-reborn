@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  Joidy-Intro
+//  JoidyIntro
 //
-//  Created by Janek Szynal on 13.10.2015.
+//  Created by Janek Szynal on 27.08.2015.
 //  Copyright © 2015 PJM. All rights reserved.
 //
 

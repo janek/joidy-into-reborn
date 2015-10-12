@@ -1,0 +1,15 @@
+1. Configure static elements (all of them)
+ - remember not to use x-position, but to use keepView instead
+
+ x problem: can't use page range and keepview's offset at the same time.
+ o temp solution : changed .left and .right cases of ScrollViewPageConstraintAnimation.swift to align with the button. Make new cases eventually, or find a different solution
+^ iPad layout? all iphones? change constraints to right ones
+
+ - camera could use a fade-in, especially if handling iPad
+
+ x font is not exactly right?
+
+
+2. Configure page 1 elements
+
+3. Configure page 1 animations
