@@ -141,9 +141,9 @@ class ViewController: AnimatedPagingScrollViewController {
     //configure static elements
     private func configurePageControl(){
 
-        pageOneIndicator.backgroundColor = UIColor.grayColor()
-        pageTwoIndicator.backgroundColor = UIColor.orangeColor()
-        pageThreeIndicator.backgroundColor = UIColor.blackColor()
+        pageOneIndicator.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
+        pageTwoIndicator.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
+        pageThreeIndicator.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
         
         pageOneIndicator.layer.cornerRadius = 3.5
         pageTwoIndicator.layer.cornerRadius = 3.5
@@ -167,6 +167,25 @@ class ViewController: AnimatedPagingScrollViewController {
         pageThreeIndicator.addConstraint(NSLayoutConstraint(item: pageThreeIndicator, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 7))
         pageThreeIndicator.addConstraint(NSLayoutConstraint(item: pageThreeIndicator, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 7))
         
+        
+        let indicatorOneAnimation = BackgroundColorAnimation(view: pageOneIndicator)
+        animator.addAnimation(indicatorOneAnimation)
+        indicatorOneAnimation[0] = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
+        indicatorOneAnimation[1] = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
+        indicatorOneAnimation[2] = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
+        
+        let indicatorTwoAnimation = BackgroundColorAnimation(view: pageTwoIndicator)
+        animator.addAnimation(indicatorTwoAnimation)
+        indicatorTwoAnimation[0] = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
+        indicatorTwoAnimation[1] = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
+        indicatorTwoAnimation[2] = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
+    
+        let indicatorThreeAnimation = BackgroundColorAnimation(view: pageThreeIndicator)
+        animator.addAnimation(indicatorThreeAnimation)
+        indicatorThreeAnimation[0] = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
+        indicatorThreeAnimation[1] = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
+        indicatorThreeAnimation[2] = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
+
     }
     
     private func configureFacebookLoginButton() {
