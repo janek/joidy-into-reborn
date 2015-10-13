@@ -30,8 +30,12 @@ ALL THINGS WRONG:
 
 - iphone 4: make room for all 
 
-- page indicators are invisible
+
 - all iPhones: sign-in and login not at sides
+
+
+- integration
+
 
 
 * why is it impossible to refactor cases to a modifier (1 + diff, 1 - diff)? see method signature in RazzleDazzle
@@ -45,5 +49,3 @@ btw
 375x667
 414x736
 
-INDICATORS:
-- make them show

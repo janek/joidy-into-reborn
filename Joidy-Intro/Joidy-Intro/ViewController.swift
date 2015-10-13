@@ -145,19 +145,33 @@ class ViewController: AnimatedPagingScrollViewController {
         pageTwoIndicator.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
         pageThreeIndicator.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
         
+        
+        //round up the views
         pageOneIndicator.layer.cornerRadius = 3.5
         pageTwoIndicator.layer.cornerRadius = 3.5
         pageThreeIndicator.layer.cornerRadius = 3.5
         
+        
+        //position horizontally
         keepView(pageOneIndicator, onPages: [-0.05, 0.95, 1.95, 2.95], atTimes:[0,1,2,3])
         keepView(pageTwoIndicator, onPages: [0, 1, 2, 3], atTimes:[0,1,2,3])
         keepView(pageThreeIndicator, onPages: [0.05, 1.05, 2.05, 3.05], atTimes:[0,1,2,3])
         
         
-        scrollView.addConstraint(NSLayoutConstraint(item: pageOneIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -100))
-        scrollView.addConstraint(NSLayoutConstraint(item: pageTwoIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -100))
-        scrollView.addConstraint(NSLayoutConstraint(item: pageThreeIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -100))
+        //position vertically
+        if phoneModel == 4 {
+            scrollView.addConstraint(NSLayoutConstraint(item: pageOneIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -95))
+            scrollView.addConstraint(NSLayoutConstraint(item: pageTwoIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -95))
+            scrollView.addConstraint(NSLayoutConstraint(item: pageThreeIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -95))
+        } else {
+            scrollView.addConstraint(NSLayoutConstraint(item: pageOneIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -100))
+            scrollView.addConstraint(NSLayoutConstraint(item: pageTwoIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -100))
+            scrollView.addConstraint(NSLayoutConstraint(item: pageThreeIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -100))
+        }
+        
+        
 
+        //width and heigth
         pageOneIndicator.addConstraint(NSLayoutConstraint(item: pageOneIndicator, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 7))
         pageOneIndicator.addConstraint(NSLayoutConstraint(item: pageOneIndicator, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 7))
         
@@ -246,15 +260,28 @@ class ViewController: AnimatedPagingScrollViewController {
     
     //configure page 1 elements
     private func configurePage1Group() {
-        scrollView.addConstraint(NSLayoutConstraint(item: page1Group, attribute: .Top, relatedBy: .GreaterThanOrEqual, toItem: contentView, attribute: .Top, multiplier: 1, constant: 5))
-        scrollView.addConstraint(NSLayoutConstraint(item: page1Group, attribute: .Bottom, relatedBy: .Equal, toItem: headingLabel, attribute: .Top, multiplier: 1, constant: -20))
+//        scrollView.addConstraint(NSLayoutConstraint(item: page1Group, attribute: .Top, relatedBy: .GreaterThanOrEqual, toItem: contentView, attribute: .Top, multiplier: 1, constant: 5))
+        
+        if phoneModel == 4 {
+            scrollView.addConstraint(NSLayoutConstraint(item: page1Group, attribute: .Bottom, relatedBy: .Equal, toItem: headingLabel, attribute: .Top, multiplier: 1, constant: -8))
+        } else {
+            scrollView.addConstraint(NSLayoutConstraint(item: page1Group, attribute: .Bottom, relatedBy: .Equal, toItem: headingLabel, attribute: .Top, multiplier: 1, constant: -20))
+        }
+        
         
         keepView(page1Group, onPage: 0)
     }
     
     private func configurePacMan() {
 
-        scrollView.addConstraint(NSLayoutConstraint(item: pacMan, attribute: .Bottom, relatedBy: .Equal, toItem: headingLabel, attribute: .Top, multiplier: 1, constant: -92))
+        
+        if phoneModel == 4 {
+            scrollView.addConstraint(NSLayoutConstraint(item: pacMan, attribute: .Bottom, relatedBy: .Equal, toItem: headingLabel, attribute: .Top, multiplier: 1, constant: -80))
+        } else {
+            scrollView.addConstraint(NSLayoutConstraint(item: pacMan, attribute: .Bottom, relatedBy: .Equal, toItem: headingLabel, attribute: .Top, multiplier: 1, constant: -92))
+        }
+        
+        
 
         switch phoneModel {
         case 6: keepView(pacMan, onPages: [0.095, 0.905, 1.905, 2.2], atTimes: [0, 1, 2, 3])
@@ -273,7 +300,13 @@ class ViewController: AnimatedPagingScrollViewController {
         headingLabel.addConstraint(NSLayoutConstraint(item: headingLabel, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 300))
         headingLabel.addConstraint(NSLayoutConstraint(item: headingLabel, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 20))
         
-        scrollView.addConstraint(NSLayoutConstraint(item: headingLabel, attribute: .Bottom, relatedBy: .Equal, toItem: longTextLabel, attribute: .Top, multiplier: 1, constant: -5))
+        if phoneModel == 4 {
+            scrollView.addConstraint(NSLayoutConstraint(item: headingLabel, attribute: .Bottom, relatedBy: .Equal, toItem: longTextLabel, attribute: .Top, multiplier: 1, constant: 15))
+        } else {
+            scrollView.addConstraint(NSLayoutConstraint(item: headingLabel, attribute: .Bottom, relatedBy: .Equal, toItem: longTextLabel, attribute: .Top, multiplier: 1, constant: -5))
+        }
+        
+        
         
         keepView(headingLabel, onPages: [-0.5, 3,5])
         
@@ -299,7 +332,12 @@ class ViewController: AnimatedPagingScrollViewController {
         longTextLabel.addConstraint(NSLayoutConstraint(item: longTextLabel, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 300))
         longTextLabel.addConstraint(NSLayoutConstraint(item: longTextLabel, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 80))
         
-        scrollView.addConstraint(NSLayoutConstraint(item: longTextLabel, attribute: .Bottom, relatedBy: .Equal, toItem: facebookLoginButon, attribute: .Top, multiplier: 1, constant: -25))
+        if phoneModel == 4 {
+            scrollView.addConstraint(NSLayoutConstraint(item: longTextLabel, attribute: .Bottom, relatedBy: .Equal, toItem: facebookLoginButon, attribute: .Top, multiplier: 1, constant: -5))
+            print("hey")
+        } else {
+            scrollView.addConstraint(NSLayoutConstraint(item: longTextLabel, attribute: .Bottom, relatedBy: .Equal, toItem: facebookLoginButon, attribute: .Top, multiplier: 1, constant: -25))
+        }
         
         keepView(longTextLabel, onPage: 0)
         
@@ -327,6 +365,7 @@ class ViewController: AnimatedPagingScrollViewController {
     private func configureCamera(){
         let cameraVerticalConstraint = NSLayoutConstraint(item: camera, attribute: .CenterY, relatedBy: .Equal, toItem: headingLabel, attribute: .Top, multiplier: 1, constant: -380)
         scrollView.addConstraint(cameraVerticalConstraint)
+
         
         switch phoneModel {
         case 6: keepView(camera, onPages: [0.095, 1.095, 2.095], atTimes: [0, 1, 2])
@@ -337,17 +376,27 @@ class ViewController: AnimatedPagingScrollViewController {
         // Move the camera from above the view down to near the top of the view between pages 1 and 2
         let cameraVerticalAnimation =  ConstraintConstantAnimation(superview: scrollView, constraint: cameraVerticalConstraint)
         cameraVerticalAnimation[0] = -580
-        cameraVerticalAnimation[1] = -124
+        if phoneModel == 4 {
+                    cameraVerticalAnimation[1] = -112
+        } else {
+                    cameraVerticalAnimation[1] = -124
+        }
+        
+
         animator.addAnimation(cameraVerticalAnimation)
         
         //fade the camera in?
     }
     
     private func configurePencil(){
-        
-        let pencilVerticalConstraint = NSLayoutConstraint(item: pencil, attribute: .Bottom, relatedBy: .Equal, toItem: headingLabel, attribute: .Top, multiplier: 1, constant: -22)
-        scrollView.addConstraint(pencilVerticalConstraint)
-        
+
+        if phoneModel == 4 {
+            let pencilVerticalConstraint = NSLayoutConstraint(item: pencil, attribute: .Bottom, relatedBy: .Equal, toItem: headingLabel, attribute: .Top, multiplier: 1, constant: -10)
+            scrollView.addConstraint(pencilVerticalConstraint)
+        } else {
+            let pencilVerticalConstraint = NSLayoutConstraint(item: pencil, attribute: .Bottom, relatedBy: .Equal, toItem: headingLabel, attribute: .Top, multiplier: 1, constant: -22)
+            scrollView.addConstraint(pencilVerticalConstraint)
+        }
         
         switch phoneModel {
         case 6: keepView(pencil, onPages: [0.905, 1.905], atTimes: [1, 2])
@@ -359,9 +408,14 @@ class ViewController: AnimatedPagingScrollViewController {
     }
     
     private func configureMicrophone(){
-        let microphoneVerticalConstraint = NSLayoutConstraint(item: microphone, attribute: .Bottom, relatedBy: .Equal, toItem: headingLabel, attribute: .Top, multiplier: 1, constant: -22)
-        scrollView.addConstraint(microphoneVerticalConstraint)
-
+        
+        if phoneModel == 4 {
+            let microphoneVerticalConstraint = NSLayoutConstraint(item: microphone, attribute: .Bottom, relatedBy: .Equal, toItem: headingLabel, attribute: .Top, multiplier: 1, constant: -10)
+            scrollView.addConstraint(microphoneVerticalConstraint)
+        } else {
+            let microphoneVerticalConstraint = NSLayoutConstraint(item: microphone, attribute: .Bottom, relatedBy: .Equal, toItem: headingLabel, attribute: .Top, multiplier: 1, constant: -22)
+            scrollView.addConstraint(microphoneVerticalConstraint)
+        }
         
         switch phoneModel {
         case 6: keepView(microphone, onPages: [1.095, 2.095], atTimes: [1, 2])
@@ -373,8 +427,15 @@ class ViewController: AnimatedPagingScrollViewController {
     
     private func configureGift(){
         
-        let giftVerticalConstraint = NSLayoutConstraint(item: gift, attribute: .Bottom, relatedBy: .Equal, toItem: headingLabel, attribute: .Top, multiplier: 1, constant: -30)
-        scrollView.addConstraint(giftVerticalConstraint)
+
+        
+        if phoneModel == 4 {
+            let giftVerticalConstraint = NSLayoutConstraint(item: gift, attribute: .Bottom, relatedBy: .Equal, toItem: headingLabel, attribute: .Top, multiplier: 1, constant: -18)
+            scrollView.addConstraint(giftVerticalConstraint)
+        } else {
+            let giftVerticalConstraint = NSLayoutConstraint(item: gift, attribute: .Bottom, relatedBy: .Equal, toItem: headingLabel, attribute: .Top, multiplier: 1, constant: -30)
+            scrollView.addConstraint(giftVerticalConstraint)
+        }
         
         keepView(gift, onPages: [1, 2])
         
@@ -392,7 +453,13 @@ class ViewController: AnimatedPagingScrollViewController {
         giftPositioningAnimation[1.199] = CGPoint(x: 0.0, y: 0.0)
         giftPositioningAnimation[1.2] = CGPoint(x: 4.0, y: 1.6)
         //the last position is for delivery to the right square of the world on page [2]
-        giftPositioningAnimation[2] = CGPoint(x: 9.0, y: -25.0)
+        
+        if phoneModel == 4 {
+            giftPositioningAnimation[2] = CGPoint(x: 9.0, y: -37.0)
+        } else {
+            giftPositioningAnimation[2] = CGPoint(x: 9.0, y: -25.0)
+        }
+
         animator.addAnimation(giftPositioningAnimation)
         
         
@@ -416,7 +483,11 @@ class ViewController: AnimatedPagingScrollViewController {
         secondHeadingLabel.addConstraint(NSLayoutConstraint(item: secondHeadingLabel, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 300))
         secondHeadingLabel.addConstraint(NSLayoutConstraint(item: secondHeadingLabel, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 20))
         
-        scrollView.addConstraint(NSLayoutConstraint(item: secondHeadingLabel, attribute: .Bottom, relatedBy: .Equal, toItem: longTextLabel, attribute: .Top, multiplier: 1, constant: -5))
+        if phoneModel == 4 {
+            scrollView.addConstraint(NSLayoutConstraint(item: secondHeadingLabel, attribute: .Bottom, relatedBy: .Equal, toItem: longTextLabel, attribute: .Top, multiplier: 1, constant: 15))
+        } else {
+            scrollView.addConstraint(NSLayoutConstraint(item: secondHeadingLabel, attribute: .Bottom, relatedBy: .Equal, toItem: longTextLabel, attribute: .Top, multiplier: 1, constant: -5))
+        }
         
         keepView(secondHeadingLabel, onPages: [-0.5, 3,5])
         
@@ -430,7 +501,6 @@ class ViewController: AnimatedPagingScrollViewController {
         
         animator.addAnimation(secondHeadingFadeAnimation)
         
-
         
     }
     
@@ -444,8 +514,13 @@ class ViewController: AnimatedPagingScrollViewController {
         //change to left and right distance
         secondLongTextLabel.addConstraint(NSLayoutConstraint(item: secondLongTextLabel, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 300))
         secondLongTextLabel.addConstraint(NSLayoutConstraint(item: secondLongTextLabel, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 80))
-        
-        scrollView.addConstraint(NSLayoutConstraint(item: secondLongTextLabel, attribute: .Bottom, relatedBy: .Equal, toItem: facebookLoginButon, attribute: .Top, multiplier: 1, constant: -25))
+    
+        if phoneModel == 4 {
+            scrollView.addConstraint(NSLayoutConstraint(item: secondLongTextLabel, attribute: .Bottom, relatedBy: .Equal, toItem: facebookLoginButon, attribute: .Top, multiplier: 1, constant: -5))
+            print("hey")
+        } else {
+            scrollView.addConstraint(NSLayoutConstraint(item: secondLongTextLabel, attribute: .Bottom, relatedBy: .Equal, toItem: facebookLoginButon, attribute: .Top, multiplier: 1, constant: -25))
+        }
         
         keepView(secondLongTextLabel, onPage: 1)
         
@@ -472,7 +547,12 @@ class ViewController: AnimatedPagingScrollViewController {
         thirdHeadingLabel.addConstraint(NSLayoutConstraint(item: thirdHeadingLabel, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 300))
         thirdHeadingLabel.addConstraint(NSLayoutConstraint(item: thirdHeadingLabel, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 20))
         
-        scrollView.addConstraint(NSLayoutConstraint(item: thirdHeadingLabel, attribute: .Bottom, relatedBy: .Equal, toItem: longTextLabel, attribute: .Top, multiplier: 1, constant: -5))
+
+        if phoneModel == 4 {
+            scrollView.addConstraint(NSLayoutConstraint(item: thirdHeadingLabel, attribute: .Bottom, relatedBy: .Equal, toItem: longTextLabel, attribute: .Top, multiplier: 1, constant: 15))
+        } else {
+            scrollView.addConstraint(NSLayoutConstraint(item: thirdHeadingLabel, attribute: .Bottom, relatedBy: .Equal, toItem: longTextLabel, attribute: .Top, multiplier: 1, constant: -5))
+        }
         
         keepView(thirdHeadingLabel, onPages: [-0.5, 3,5])
         
@@ -499,7 +579,12 @@ class ViewController: AnimatedPagingScrollViewController {
         thirdLongTextLabel.addConstraint(NSLayoutConstraint(item: thirdLongTextLabel, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 300))
         thirdLongTextLabel.addConstraint(NSLayoutConstraint(item: thirdLongTextLabel, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 80))
         
-        scrollView.addConstraint(NSLayoutConstraint(item: thirdLongTextLabel, attribute: .Bottom, relatedBy: .Equal, toItem: facebookLoginButon, attribute: .Top, multiplier: 1, constant: -25))
+        if phoneModel == 4 {
+            scrollView.addConstraint(NSLayoutConstraint(item: thirdLongTextLabel, attribute: .Bottom, relatedBy: .Equal, toItem: facebookLoginButon, attribute: .Top, multiplier: 1, constant: -5))
+            print("hey")
+        } else {
+            scrollView.addConstraint(NSLayoutConstraint(item: thirdLongTextLabel, attribute: .Bottom, relatedBy: .Equal, toItem: facebookLoginButon, attribute: .Top, multiplier: 1, constant: -25))
+        }
         
         keepView(thirdLongTextLabel, onPage: 2)
     }
