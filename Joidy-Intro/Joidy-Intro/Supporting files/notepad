@@ -13,3 +13,37 @@
 2. Configure page 1 elements
 
 3. Configure page 1 animations
+
+___
+ANEW
+
+1. Find out how elems are positioned on different screens
+2. Make a list of changes to be made
+3. Attempt to make global fixes
+4. Make individual fixes
+
+5. Update for iOS9
+
+
+
+ALL THINGS WRONG:
+
+- iphone 4: make room for all 
+
+- page indicators are invisible
+- all iPhones: sign-in and login not at sides
+
+
+* why is it impossible to refactor cases to a modifier (1 + diff, 1 - diff)? see method signature in RazzleDazzle
+
+
+
+
+btw
+320x480
+320x568
+375x667
+414x736
+
+INDICATORS:
+- make them show

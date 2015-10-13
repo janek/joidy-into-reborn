@@ -12,11 +12,13 @@ import RazzleDazzle
 
 class ViewController: AnimatedPagingScrollViewController {
     
+    private var phoneModel = 0
+    
     //static elements
-    // add dots ... here (as xib?)
     private let pageControl = UIPageControl()
     
     //page control
+    //the positioning and size of the indicators will be overwritten by constraints and library methods
     private let pageOneIndicator = UIView(frame: CGRectMake(50.0, 50.0, 8.0, 8.0))
     private let pageTwoIndicator = UIView(frame: CGRectMake(50.0, 50.0, 8.0, 8.0))
     private let pageThreeIndicator = UIView(frame: CGRectMake(50.0, 50.0, 8.0, 8.0))
@@ -52,10 +54,22 @@ class ViewController: AnimatedPagingScrollViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkPhoneModel()
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
         scrollView.pagingEnabled = true
         configureViews()
         configureAnimations()
+    }
+    
+    private func checkPhoneModel() {
+        let screenHeight = UIScreen.mainScreen().bounds.height
+        switch screenHeight {
+        case 480: phoneModel = 4
+        case 568: phoneModel = 5
+        case 667: phoneModel = 6
+        case 736: phoneModel = 7
+        default: phoneModel = 1
+        }
     }
     
     private func configureViews() {
@@ -126,27 +140,32 @@ class ViewController: AnimatedPagingScrollViewController {
     
     //configure static elements
     private func configurePageControl(){
-//        pageControl.numberOfPages = 3
-//        pageControl.backgroundColor = UIColor.redColor()
-//        scrollView.addConstraint(NSLayoutConstraint(item: pageControl, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -100))
-//        keepView(pageControl, onPages: [-0.5, 3.5])
+
         pageOneIndicator.backgroundColor = UIColor.grayColor()
-        pageTwoIndicator.backgroundColor = UIColor.grayColor()
-        pageThreeIndicator.backgroundColor = UIColor.grayColor()
+        pageTwoIndicator.backgroundColor = UIColor.orangeColor()
+        pageThreeIndicator.backgroundColor = UIColor.blackColor()
         
-        pageOneIndicator.layer.cornerRadius = 4.0
-        pageTwoIndicator.layer.cornerRadius = 4.0
-        pageThreeIndicator.layer.cornerRadius = 4.0
-//    
-        keepView(pageOneIndicator, onPage: 0)
-        keepView(pageTwoIndicator, onPages: [-0.5, 2.5])
-        keepView(pageThreeIndicator, onPages: [-0.5, 3.5])
+        pageOneIndicator.layer.cornerRadius = 3.5
+        pageTwoIndicator.layer.cornerRadius = 3.5
+        pageThreeIndicator.layer.cornerRadius = 3.5
+        
+        keepView(pageOneIndicator, onPages: [-0.05, 0.95, 1.95, 2.95], atTimes:[0,1,2,3])
+        keepView(pageTwoIndicator, onPages: [0, 1, 2, 3], atTimes:[0,1,2,3])
+        keepView(pageThreeIndicator, onPages: [0.05, 1.05, 2.05, 3.05], atTimes:[0,1,2,3])
         
         
-//        scrollView.addConstraint(NSLayoutConstraint(item: pageOneIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -100))
-//        scrollView.addConstraint(NSLayoutConstraint(item: pageTwoIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -100))
-//        scrollView.addConstraint(NSLayoutConstraint(item: pageThreeIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -100))
+        scrollView.addConstraint(NSLayoutConstraint(item: pageOneIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -100))
+        scrollView.addConstraint(NSLayoutConstraint(item: pageTwoIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -100))
+        scrollView.addConstraint(NSLayoutConstraint(item: pageThreeIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -100))
+
+        pageOneIndicator.addConstraint(NSLayoutConstraint(item: pageOneIndicator, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 7))
+        pageOneIndicator.addConstraint(NSLayoutConstraint(item: pageOneIndicator, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 7))
         
+        pageTwoIndicator.addConstraint(NSLayoutConstraint(item: pageTwoIndicator, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 7))
+        pageTwoIndicator.addConstraint(NSLayoutConstraint(item: pageTwoIndicator, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 7))
+        
+        pageThreeIndicator.addConstraint(NSLayoutConstraint(item: pageThreeIndicator, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 7))
+        pageThreeIndicator.addConstraint(NSLayoutConstraint(item: pageThreeIndicator, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 7))
         
     }
     
@@ -162,8 +181,12 @@ class ViewController: AnimatedPagingScrollViewController {
         
         facebookLoginButon.addConstraint(NSLayoutConstraint(item: facebookLoginButon, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 50))
         
-        scrollView.addConstraint(NSLayoutConstraint(item: facebookLoginButon, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -50))
         
+        if phoneModel == 4 {
+            scrollView.addConstraint(NSLayoutConstraint(item: facebookLoginButon, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -35))
+        } else {
+            scrollView.addConstraint(NSLayoutConstraint(item: facebookLoginButon, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -50))
+        }
         
         keepView(facebookLoginButon, onPages: [-0.5, 3.5])
     }
@@ -174,7 +197,12 @@ class ViewController: AnimatedPagingScrollViewController {
         emailLabel.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1.0)
         emailLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        scrollView.addConstraint(NSLayoutConstraint(item: emailLabel, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -15))
+        if phoneModel == 4 {
+             scrollView.addConstraint(NSLayoutConstraint(item: emailLabel, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -7))
+        } else {
+             scrollView.addConstraint(NSLayoutConstraint(item: emailLabel, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -15))
+        }
+       
    
         keepView(emailLabel, onPages: [-0.5, 3.5], withAttribute: .Left)
     }
@@ -185,10 +213,15 @@ class ViewController: AnimatedPagingScrollViewController {
         loginLabel.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1.0)
         loginLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        scrollView.addConstraint(NSLayoutConstraint(item: loginLabel, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -15))
+        
+        if phoneModel == 4 {
+            scrollView.addConstraint(NSLayoutConstraint(item: loginLabel, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -7))
+        } else {
+            scrollView.addConstraint(NSLayoutConstraint(item: loginLabel, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -15))
+        }
         
         keepView(loginLabel, onPages: [-0.5, 3.5], withAttribute: .Right)
-
+        
     }
 
     
@@ -203,8 +236,13 @@ class ViewController: AnimatedPagingScrollViewController {
     private func configurePacMan() {
 
         scrollView.addConstraint(NSLayoutConstraint(item: pacMan, attribute: .Bottom, relatedBy: .Equal, toItem: headingLabel, attribute: .Top, multiplier: 1, constant: -92))
+
+        switch phoneModel {
+        case 6: keepView(pacMan, onPages: [0.095, 0.905, 1.905, 2.2], atTimes: [0, 1, 2, 3])
+        case 7: keepView(pacMan, onPages: [0.087, 0.913, 1.913, 2.2], atTimes: [0, 1, 2, 3])
+        default: keepView(pacMan, onPages: [0.111, 0.889, 1.889, 2.2], atTimes: [0, 1, 2, 3])
+        }
         
-        keepView(pacMan, onPages: [0.111, 0.889, 1.889, 2.2], atTimes: [0, 1, 2, 3])
     }
     
     private func configureHeadingLabel() {
@@ -271,7 +309,11 @@ class ViewController: AnimatedPagingScrollViewController {
         let cameraVerticalConstraint = NSLayoutConstraint(item: camera, attribute: .CenterY, relatedBy: .Equal, toItem: headingLabel, attribute: .Top, multiplier: 1, constant: -380)
         scrollView.addConstraint(cameraVerticalConstraint)
         
-        keepView(camera, onPages: [0.111, 1.111, 2.111], atTimes: [0, 1, 2])
+        switch phoneModel {
+        case 6: keepView(camera, onPages: [0.095, 1.095, 2.095], atTimes: [0, 1, 2])
+        case 7: keepView(camera, onPages: [0.087, 1.087, 2.087], atTimes: [0, 1, 2])
+        default: keepView(camera, onPages: [0.111, 1.111, 2.111], atTimes: [0, 1, 2])
+        }
         
         // Move the camera from above the view down to near the top of the view between pages 1 and 2
         let cameraVerticalAnimation =  ConstraintConstantAnimation(superview: scrollView, constraint: cameraVerticalConstraint)
@@ -286,15 +328,27 @@ class ViewController: AnimatedPagingScrollViewController {
         
         let pencilVerticalConstraint = NSLayoutConstraint(item: pencil, attribute: .Bottom, relatedBy: .Equal, toItem: headingLabel, attribute: .Top, multiplier: 1, constant: -22)
         scrollView.addConstraint(pencilVerticalConstraint)
-        keepView(pencil, onPages: [0.889, 1.889], atTimes: [1, 2])
-    
+        
+        
+        switch phoneModel {
+        case 6: keepView(pencil, onPages: [0.905, 1.905], atTimes: [1, 2])
+        case 7: keepView(pencil, onPages: [0.913, 1.913], atTimes: [1, 2])
+        default: keepView(pencil, onPages: [0.889, 1.889], atTimes: [1, 2])
+        }
+        
+        
     }
     
     private func configureMicrophone(){
         let microphoneVerticalConstraint = NSLayoutConstraint(item: microphone, attribute: .Bottom, relatedBy: .Equal, toItem: headingLabel, attribute: .Top, multiplier: 1, constant: -22)
         scrollView.addConstraint(microphoneVerticalConstraint)
 
-        keepView(microphone, onPages: [1.111, 2.111], atTimes: [1, 2])
+        
+        switch phoneModel {
+        case 6: keepView(microphone, onPages: [1.095, 2.095], atTimes: [1, 2])
+        case 7: keepView(microphone, onPages: [1.087, 2.087], atTimes: [1, 2])
+        default: keepView(microphone, onPages: [1.111, 2.111], atTimes: [1, 2])
+        }
         
     }
     
@@ -470,10 +524,10 @@ class ViewController: AnimatedPagingScrollViewController {
         cameraFadeAnimation.addKeyframe(1.199, value: 1)
         cameraFadeAnimation.addKeyframe(1.20, value: 0)
         animator.addAnimation(cameraFadeAnimation)
-        
     
     }
     
-
+    
+    
 }
 
