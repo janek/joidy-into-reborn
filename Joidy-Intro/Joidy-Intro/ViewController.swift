@@ -153,9 +153,9 @@ class ViewController: AnimatedPagingScrollViewController {
         
         
         //position horizontally
-        keepView(pageOneIndicator, onPages: [-0.05, 0.95, 1.95, 2.95], atTimes:[0,1,2,3])
-        keepView(pageTwoIndicator, onPages: [0, 1, 2, 3], atTimes:[0,1,2,3])
-        keepView(pageThreeIndicator, onPages: [0.05, 1.05, 2.05, 3.05], atTimes:[0,1,2,3])
+        keepView(pageOneIndicator, onPages: [-1.05, -0.05, 0.95, 1.95, 2.95], atTimes:[-1,0,1,2,3])
+        keepView(pageTwoIndicator, onPages: [-1, 0, 1, 2, 3], atTimes:[-1,0,1,2,3])
+        keepView(pageThreeIndicator, onPages: [-0.95, 0.05, 1.05, 2.05, 3.05], atTimes:[-1,0,1,2,3])
         
         
         //position vertically
@@ -164,9 +164,9 @@ class ViewController: AnimatedPagingScrollViewController {
             scrollView.addConstraint(NSLayoutConstraint(item: pageTwoIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -95))
             scrollView.addConstraint(NSLayoutConstraint(item: pageThreeIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -95))
         } else {
-            scrollView.addConstraint(NSLayoutConstraint(item: pageOneIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -100))
-            scrollView.addConstraint(NSLayoutConstraint(item: pageTwoIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -100))
-            scrollView.addConstraint(NSLayoutConstraint(item: pageThreeIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -100))
+            scrollView.addConstraint(NSLayoutConstraint(item: pageOneIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -120))
+            scrollView.addConstraint(NSLayoutConstraint(item: pageTwoIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -120))
+            scrollView.addConstraint(NSLayoutConstraint(item: pageThreeIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -120))
         }
         
         
@@ -237,7 +237,15 @@ class ViewController: AnimatedPagingScrollViewController {
         }
        
    
-        keepView(emailLabel, onPages: [-0.5, 3.5], withAttribute: .Left)
+//        keepView(emailLabel, onPages: [-0.5, 3.5], withAttribute: .Left)
+
+        
+        switch phoneModel {
+        case 6: keepView(emailLabel, onPages: [-1.24,-0.24, 0.76, 1.76, 2.76], atTimes: [-1,0,1,2,3])
+        case 7: keepView(emailLabel, onPages: [-1.21,-0.21, 0.79, 1.79, 2.79 ], atTimes: [-1,0,1,2,3])
+        default: keepView(emailLabel, onPages: [-1.28,-0.28, 0.72, 1.72, 2.72], atTimes: [-1,0,1,2,3])
+        }
+
     }
     
     private func configureLoginLabel() {
@@ -253,7 +261,13 @@ class ViewController: AnimatedPagingScrollViewController {
             scrollView.addConstraint(NSLayoutConstraint(item: loginLabel, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -15))
         }
         
-        keepView(loginLabel, onPages: [-0.5, 3.5], withAttribute: .Right)
+
+        
+        switch phoneModel {
+        case 6: keepView(loginLabel, onPages: [-0.65, 0.35, 1.35, 2.35, 3.35], atTimes: [-1,0,1,2,3])
+        case 7: keepView(loginLabel, onPages: [-0.68, 0.32, 1.32, 2.32, 3.32], atTimes: [-1,0,1,2,3])
+        default: keepView(loginLabel, onPages: [-0.59, 0.41, 1.41, 2.41, 3.41], atTimes: [-1,0,1,2,3])
+        }
         
     }
 
@@ -377,9 +391,9 @@ class ViewController: AnimatedPagingScrollViewController {
         let cameraVerticalAnimation =  ConstraintConstantAnimation(superview: scrollView, constraint: cameraVerticalConstraint)
         cameraVerticalAnimation[0] = -580
         if phoneModel == 4 {
-                    cameraVerticalAnimation[1] = -112
+            cameraVerticalAnimation[1] = -112
         } else {
-                    cameraVerticalAnimation[1] = -124
+            cameraVerticalAnimation[1] = -124
         }
         
 
